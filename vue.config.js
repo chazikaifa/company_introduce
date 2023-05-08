@@ -1,4 +1,10 @@
 module.exports = {
   publicPath: './',
-  lintOnSave: false
+  lintOnSave: false,
+
+  pluginOptions: {
+    'i18n-transform': {
+      i18nPath: 'src/i18n/index.js'
+    }
+  }
 }
