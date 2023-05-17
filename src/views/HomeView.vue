@@ -1,10 +1,12 @@
 <template>
-  <el-carousel height="100%" class="home">
+  <el-carousel 
+    :height="isMobile? '800px' :'100%'"
+    trigger = "click"
+    class="home">
     <el-carousel-item  
     	class="item" v-for="item in carousel_list" 
     	:style="'background-image: url(' + item.img + ')'"
-    	:key="item.text" 
-    	invertal="5000">
+    	:key="item.text">
   		<div class="item_text" :style="isMobile ? 'font-size: 38px' : 'font-size: 56px'">{{$t(item.text)}}</div>
     </el-carousel-item>
   </el-carousel>
@@ -49,13 +51,10 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+  opacity: 0.80;
 }
 .item_text{
 	color: #FFF;
 	font-size: 56px;
-}
-.item img{
-	height: 100%;
-	width: 100%;
 }
 </style>

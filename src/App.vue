@@ -3,10 +3,10 @@
     <el-header id="nav" height="70px">
       <Navigator :isMobile="isMobile"/>
     </el-header>
-    <el-main>
+    <el-main id="main_view">
       <router-view :isMobile="isMobile"/>
     </el-main>
-    <el-footer>
+    <el-footer id="website_info" height="50px">
       <WebsiteInfo :isMobile="isMobile"/>
     </el-footer>
   </el-container>
@@ -72,7 +72,11 @@ body {
   height: -webkit-fill-available;
   background: #FFF;
 }
-.el-footer{
+#main_view {
+  padding: 0;
+}
+#website_info{
   border-top: 1px #EAEAEA solid;
+  padding: 0 5px 0 0;
 }
 </style>

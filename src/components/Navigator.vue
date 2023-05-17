@@ -2,11 +2,11 @@
   <div class="container">
   	<el-row v-show="!isMobile">
   		<el-col :span="2">
-  			<img class="nav_logo" alt="Vue logo" src="../assets/logo.png">
+  			<img class="nav_logo" alt="Vue logo" src="../assets/logo.png" @click="navSelect('1')">
   		</el-col>
   		<el-col :span="20">
   			<el-menu class="nav_bar" :default-active="index" mode="horizontal" @select="navSelect">
-  				<el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item>
+  				<!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
   				<el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
   				<el-menu-item index="3">{{$t("navigator.products")}}</el-menu-item>
   				<el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
@@ -17,17 +17,17 @@
   		</el-col>
   	</el-row>
   	<el-row v-show="isMobile">
-  		<el-col class="mobile_btn_container" :span="3">
+  		<el-col class="mobile_btn_container" :span="6">
   			<i class="el-icon-s-grid btn_menu" @click="changeOpen"></i>
   		</el-col>
-  		<el-col :span="18" class="nav_mobile_logo_container"><img class="nav_logo" alt="Vue logo" src="../assets/logo.png"></el-col>
-  		<el-col :span="3" class="language">
+  		<el-col :span="12" class="nav_mobile_logo_container"><img class="nav_logo" alt="Vue logo" src="../assets/logo.png" @click="navSelect('1')"></el-col>
+  		<el-col :span="6" class="language">
   			<el-button class="btn_language" type="text" @click="changeLan">{{$t("navigator.switch")}}</el-button>
   		</el-col>
   	</el-row>
   	<transition name="el-zoom-in-top" :duration="1500">
 	  	<el-menu key="mobile_nav" v-show="isMobile && isOpen" class="mobile_nav" :default-active="index" @select="navSelect">
-				<el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item>
+				<!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
 				<el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
 				<el-menu-item index="3">{{$t("navigator.products")}}</el-menu-item>
 				<el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
@@ -56,24 +56,25 @@ export default {
   		this.isOpen = !this.isOpen;
   	},
   	navSelect: function(key) {
+      this.isOpen = false;
+      if(this.index == key) return;
   		this.index = key;
-  		this.isOpen = false;
-      let to;
+      let to = {};
       switch(key) {
         case '1':
-          to = '/';
+          to.name = 'home';
           break;
         case '2':
-          to = '/about'
+          to.name = 'about'
           break;
         case '3':
-          to = '/product'
+          to.name = 'product'
           break;
         case '4':
-          to = '/contact'
+          to.name = 'contact'
           break;
         default:
-          to = '/'
+          to.name = 'home'
       }
       this.$router.push(to);
   	}
@@ -129,12 +130,11 @@ export default {
 }
 .language{
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
 }
 .btn_language{
-	width: 80%;
-	margin: auto;
+	margin-right: 5px;
 }
 .mobile_btn_container {
 	justify-content: flex-start;
@@ -148,5 +148,6 @@ export default {
 	left: 0;
 	right: 0;
 	bottom: 0;
+  z-index: 999;
 }
 </style>
