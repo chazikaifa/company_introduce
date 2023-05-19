@@ -5,6 +5,7 @@
     </el-header>
     <el-main id="main_view">
       <router-view :isMobile="isMobile"/>
+      <el-backtop target=".el-main" :bottom="100"></el-backtop>
     </el-main>
     <el-footer id="website_info" height="50px">
       <WebsiteInfo :isMobile="isMobile"/>
@@ -78,5 +79,8 @@ body {
 #website_info{
   border-top: 1px #EAEAEA solid;
   padding: 0 5px 0 0;
+}
+p {
+  word-break:break-all;
 }
 </style>

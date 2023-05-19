@@ -5,6 +5,11 @@ import i18n from './i18n'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+import BaiduMap from 'vue-baidu-map'
+Vue.use(BaiduMap, {
+	ak: 'q5R0lA8y63yYITe3S8ZnOMRXtIIv79lz'
+})
+
 
 Vue.config.productionTip = false
 

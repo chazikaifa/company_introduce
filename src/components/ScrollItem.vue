@@ -33,7 +33,7 @@ export default {
 					let praghs = val.split('\n');
 					this.content = '';
 					for(let pragh of praghs) {
-						this.content =  ` ${this.content} <p style="word-break:break-all"> ${pragh} </p> `
+						this.content =  ` ${this.content} <p> ${pragh} </p> `
 					}
 				}
       },

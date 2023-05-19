@@ -23,5 +23,33 @@ module.exports = {
     section2_title: 'Section 2',
     section2: 'WhateverWhateverWhateverWhateverWhateverWhateverWhateverWhateverWhatever\nWhateverWhateverWhateverWhateverWhateverWhateverWhateverWhateverWhatever\nWhateverWhateverWhateverWhateverWhateverWhateverWhateverWhateverWhatever\nWhateverWhateverWhateverWhateverWhateverWhateverWhatever',
     section2_img: '1.jpg',  
+  },
+  contact: {
+    title:'Contact Details',
+    company_name: 'Guangzhou Jiekai Paper Packaging Co., Ltd',
+    address_title: 'Address',
+    address:'Room 304, Building 2, No. 383, North Panyu Avenue, Nancun Town, Panyu District, Guangzhou',
+    phone_title: 'Phone',
+    phone: '020-12345678',
+    email_title: 'E-mail',
+    email:'123456789@qq.com',
+    index_title: 'Website',
+    index: 'www.jiekai.com',
+    qq_title: 'QQ',
+    qq: '123456789',
+    wechat_title: 'Wechat',
+    wechat: '123456789',
+    online_msg: 'Online Message',
+    form: {
+      name: 'Name:',
+      email: 'E-mail:',
+      phone: 'Phone:',
+      message:'Message:',
+      submit:'Submit',
+      err_name_empty:'Name can NOT be empty!',
+      err_email_empty:'Email can NOT be empty!',
+      err_message_empty:'Message can NOT be empty!',
+      submit_success:'Submit success!'
+    },
   }
 }
