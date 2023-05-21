@@ -7,7 +7,10 @@
     		<el-button style="float: right; padding: 8px" type="primary" @click="online_msg">{{$t('contact.online_msg')}}</el-button>
     		<el-dialog
     			:visible.sync="showDialog"
-    			:title="$t('contact.online_msg')">
+    			:title="$t('contact.online_msg')"
+    			:close-on-click-modal="false"
+    			:close-on-press-escape="false"
+    			:show-close="!submitting">
     			<el-form :model="form">
     				<el-form-item :label="$t('contact.form.name')" required>
     					<el-input v-model="form.name"/>
@@ -57,6 +60,7 @@
 
 <script>
 import Title from '@/components/Title.vue'		
+import { httpPost } from '@/utils/http'
 
 export default {	
 	name: 'ContactView',
@@ -105,6 +109,14 @@ export default {
 			}
 		},
 		upload_message: function() {
+			// httpPost('onlinemMsg', this.form)
+			// .then((res)=>{
+			// 	console.log(res);
+			// })
+			// .catch((err) => {
+			// 	console.log(err);
+			// })
+
 			let callback = ()=>{
 				this.submitting = false;
 				this.showDialog = false;

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
 
 Vue.use(VueRouter)
 
@@ -16,22 +16,27 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import('../views/AboutView.vue')
+    component: () => import('@/views/AboutView.vue')
   },
   {
     path: '/product',
     name: 'product',
-    component: () => import('../views/ProductView')
+    component: () => import('@/views/ProductView'),
+  },
+  {
+    path: '/product/:id',
+    name:'productItem',
+    component: () => import('@/views/ProductItemView')
   },
   {
     path: '/contact',
     name: 'contact',
-    component: () => import('../views/ContactView')
+    component: () => import('@/views/ContactView')
   },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

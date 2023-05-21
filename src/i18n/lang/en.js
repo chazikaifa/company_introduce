@@ -51,5 +51,13 @@ module.exports = {
       err_message_empty:'Message can NOT be empty!',
       submit_success:'Submit success!'
     },
+  },
+  product: {
+    httpFail: 'Fail To get product list. Please try again later!',
+    loading: 'Loading...',
+  },
+  product_item: {
+    httpFail: 'Fail To get product detail. Please try again later!',
+    loading: 'Loading...'
   }
 }

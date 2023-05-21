@@ -75,6 +75,8 @@ body {
 }
 #main_view {
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 #website_info{
   border-top: 1px #EAEAEA solid;

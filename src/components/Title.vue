@@ -16,13 +16,26 @@ export default {
 		text: String
 	},
 	mounted() {
-		this.picture = require('../assets/' + this.img);
 	},
 	data() {
 		return {
 			picture: null
 		}
-	}
+	},
+	watch: {
+    img: {
+      handler: function (val, oldVal) {
+        if(val) {
+					try {
+						this.picture = require('../assets/' + val);
+					} catch (err) {
+						console.log(`[Title-${this.text}] Cannot find img ${val}`)
+					}
+				}
+      },
+      immediate: true
+    },
+  }
 
 }
 </script>
@@ -36,6 +49,7 @@ export default {
 	align-items: flex-start;
 	padding-left: 40px;
 	flex-direction: column;
+	background-color: #CCCCCC;
 }
 .banner_title .banner_text {
 	font-size: 30px;

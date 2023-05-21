@@ -51,5 +51,13 @@ module.exports = {
       err_message_empty:'留言内容不能为空！',
       submit_success:'提交成功！',
     },
+  },
+  product: {
+    httpFail: '无法获取产品列表，请稍后再试！',
+    loading: '加载中...',
+  },
+  product_item: {
+    httpFail: '无法获取产品详情，请稍后再试！',
+    loading: '加载中...'
   }
 }

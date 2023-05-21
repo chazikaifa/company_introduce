@@ -48,6 +48,8 @@ export default {
   		isOpen: false
   	}
   },
+  mounted() {
+  },
   methods: {
   	changeLan: function() {
   		this.changeLanguage()
@@ -57,13 +59,12 @@ export default {
   	},
   	navSelect: function(key) {
       this.isOpen = false;
-      if(this.index == key) return;
   		this.index = key;
       let to = {};
       switch(key) {
-        case '1':
-          to.name = 'home';
-          break;
+        //case '1':
+        //  to.name = 'home';
+        //  break;
         case '2':
           to.name = 'about'
           break;
@@ -76,6 +77,7 @@ export default {
         default:
           to.name = 'home'
       }
+      if(this.$route.name == to.name) return;
       this.$router.push(to);
   	}
   },
@@ -88,6 +90,25 @@ export default {
       },
       immediate: true
     },
+    $route: {
+      handler: function (val, oldVal) {
+        switch(val.name) {
+          case 'about':
+            this.index = '2';
+            break;
+          case 'product':
+            this.index = '3';
+            break;
+          case 'contact':
+            this.index = '4';
+            break;
+          default:
+            this.index = '1';
+            break;
+        }
+      },
+      immediate: true
+    }
   }
 }
 </script>
