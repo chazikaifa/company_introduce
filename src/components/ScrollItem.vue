@@ -1,6 +1,6 @@
 <template>
   <div class="scroll_item" :mobile="isMobile" :style="style" :type="type">
-  	<div class="title">{{title}}</div>
+  	<div class="title" >{{title}}</div>
   	<el-divider></el-divider>
   	<div class="content" v-html="content"></div>
   </div>
@@ -15,7 +15,8 @@ export default {
 		type: String,
 		title: String,
 		text: String,
-		img: String
+		img: String,
+		color: String
 	},
 	components: {
 	},
@@ -25,6 +26,9 @@ export default {
 			content: '',
 			style: ''
 		}
+	},
+	created(){
+		console.log(this.color);
 	},
 	watch: {
     text: {
@@ -67,6 +71,8 @@ export default {
 	padding: 20px 0;
 	margin: 12px 0;
 	background-size: cover;
+	isolation: isolate;
+	background-color: #FFF;
 }
 .scroll_item[type=image] {
 	height: 500px;
@@ -78,8 +84,9 @@ export default {
 .scroll_item .title {
 	margin: 0 auto;
 	font-size: 34px;
-	color: #595959;
+	color: #959595;
 	font-weight: 300;
+	mix-blend-mode: difference;
 }
 .scroll_item .el-divider {
 	width: 120px;
@@ -90,7 +97,8 @@ export default {
 .scroll_item .content {
 	margin: 48px;
 	font-size: 14px;
-	color: #595959;
+	color: #959595;
+	mix-blend-mode: difference;
 }
 .scroll_item[mobile] .content {
 	margin: 24px;

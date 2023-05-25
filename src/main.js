@@ -26,6 +26,7 @@ Vue.prototype.changeLanguage = function() {
 			lan = "en"
 	}
 	this.$i18n.locale = lan;
+	document.title = this.$t('title.company_name');
 	localStorage.setItem('languageSet', lan)
 }
 

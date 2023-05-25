@@ -24,6 +24,7 @@ export default {
     WebsiteInfo
   },
   mounted() {
+    document.title = this.$t('title.company_name');
     this.screenWidth = document.body.clientWidth
     window.onresize = () => {
       return (() => {

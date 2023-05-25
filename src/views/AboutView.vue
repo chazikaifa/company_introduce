@@ -1,13 +1,14 @@
 <template>
   <div class="about">
-    <Title :isMobile="isMobile" :img="'1.jpg'" :text="$t('navigator.introduce')"></Title>
+    <Title :isMobile="isMobile" :img="'banner_about.jpg'" :text="$t('navigator.introduce')"></Title>
     <ScrollItem 
     	v-for="item in items" 
     	:isMobile="isMobile" 
     	:title="$t(item.title)" 
     	:text="$t(item.text)" 
     	:img="$t(item.img)"
-    	:type="item.type"/>
+    	:color="$t(item.color)"
+    	:type="$t(item.type)"/>
   </div>
 </template>
 
@@ -28,20 +29,25 @@ export default {
 		return {
 			items: [
 				{
-					title: 'introduce.abstract_title',
-					text: 'introduce.abstract',
-					type: 'text'
+					title: 'introduce.abstract.title',
+					text: 'introduce.abstract.text',
+					img: 'introduce.abstract.img',
+					type: 'introduce.abstract.type',
+					color: 'introduce.abstract.color'
 				},
 				{
-					title: 'introduce.section1_title',
-					img: 'introduce.section1_img',
-					type: 'image'
+					title: 'introduce.section1.title',
+					text: 'introduce.section1.text',
+					img: 'introduce.section1.img',
+					type: 'introduce.section1.type',
+					color: 'introduce.section1.color'
 				},
 				{
-					title: 'introduce.section2_title',
-					text: 'introduce.section2',
-					img: 'introduce.section2_img',
-					type: 'mixed'
+					title: 'introduce.section2.title',
+					text: 'introduce.section2.text',
+					img: 'introduce.section2.img',
+					type: 'introduce.section2.type',
+					color: 'introduce.section2.color'
 				}
 			]
 		}

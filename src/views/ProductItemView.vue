@@ -45,35 +45,20 @@ export default {
 				img: null,
 				description: null
 			},
-			loading: null,
 			showSkeleton: true,
 		}
 	},
 	created() {
-		this.loading = this.$loading({
-			lock: true,
-			text: this.$t('product_item.loading'),
-			spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)'
-		})
-		// this.$router.onReady(()=>{
-		// 	httpGet('product/' + this.$route.params.id)
-		// 		.then((res)=>{
-		// 			console.log(res);
-		//			this.loading = false;
-		// 		})
-		// 		.catch((err)=>{
-		// 			console.log("[ProductItem]" + err)
-		// 			this.$message.error(this.$t('product_item.httpFail'))
-		// 		})
+		// this.loading = this.$loading({
+		// 	lock: true,
+		// 	text: this.$t('product_item.loading'),
+		// 	spinner: 'el-icon-loading',
+  //     background: 'rgba(0, 0, 0, 0.7)'
 		// })
 		this.$router.onReady(()=>{
-			setTimeout(()=>{
-				this.item = dumpDataList[parseInt(this.$route.params.id) - 1];
-				this.item.content = this.solveDescription(this.item.description)
-				this.loading.close();
-				this.showSkeleton = false;
-			}, 500)
+			this.item = this.$route.params.product
+			this.item.content = this.solveDescription(this.item.description)
+			this.showSkeleton = false;
 		})
 	},
   methods: {

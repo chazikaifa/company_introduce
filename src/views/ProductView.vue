@@ -1,19 +1,19 @@
 <template>
   <div class="product">
-    <Title :isMobile="isMobile" :img="'2.jpg'" :text="$t('navigator.products')"></Title>
+    <Title :isMobile="isMobile" :img="'banner_product.jpg'" :text="$t('navigator.products')"></Title>
     <div class="product_list">
     	<el-row v-if="!isMobile" v-for="product_row in product_list">
 	    	<el-col :span="12" v-for="product in product_row">
-	    		<el-card class="item_card" shadow="hover" @click.native="toProduct(product.id)">
-	    			<div class="item_title">{{product.name}}</div>
+	    		<el-card class="item_card" shadow="hover" @click.native="toProduct(product)">
+	    			<div class="item_title" slot="header">{{product.name}}</div>
 	    			<div class="item_card_image" :style="'background-image: url(' + product.picture + ')'"></div>
 	    		</el-card>
 	    	</el-col>
 	    </el-row>
 	    <el-row v-if="isMobile">
 	    	<el-col :span="24" v-for="product in products">
-	    		<el-card class="item_card mobile" shadow="hover" @click.native="toProduct(product.id)">
-	    			<div class="item_title">{{product.name}}</div>
+	    		<el-card class="item_card mobile" shadow="hover" @click.native="toProduct(product)">
+	    			<div class="item_title" slot="header">{{product.name}}</div>
 	    			<div class="item_card_image" :style="'background-image: url(' + product.picture + ')'"></div>
 	    		</el-card>
 	    	</el-col>
@@ -25,16 +25,7 @@
 <script>
 import Title from '@/components/Title.vue'		
 import { httpGet } from '@/utils/http'
-
-const productDumpData = [];
-productDumpData.splice(0);
-for(let i = 0; i < 6; i++) {
-	let temp = {};
-	temp.id = i + 1;
-	temp.name = `产品${temp.id}号`,
-	temp.img = Math.ceil(Math.random() * 3) + '.jpg';
-	productDumpData.push(temp);
-}
+import { getDumpProducts } from '@/utils/dumpData'
 
 export default {	
 	name: 'ProductView',
@@ -54,7 +45,7 @@ export default {
 	created() {
 		this.loading = this.$loading({
 			lock: true,
-			text: this.$t('product_item.loading'),
+			text: this.$t('product.loading'),
 			spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
 		})
@@ -68,20 +59,20 @@ export default {
 		// 		this.$message.error(this.$t('product.httpFail'))
 		// 	})
 		setTimeout(()=>{
-			this.products = [...productDumpData];
+			this.products = [...getDumpProducts(6)];
 			for(let i in this.products) {
 				this.products[i].picture = require('../assets/' + this.products[i].img)
 			}
 			this.solveProducts();
 			this.loading.close();
-		}, 500)
+		}, 300)
 	},
 	methods: {
-		toProduct: function(id) {
+		toProduct: function(product) {
 			let to = {
 				name: 'productItem',
 				params: {
-					id: id
+					product: product
 				}
 			};
 			this.$router.push(to);
@@ -106,23 +97,19 @@ export default {
 }
 .item_card{
 	margin: 12px;
-	height: 260px;
 }
 .item_card .el-card__body {
 	padding: 0;
 }
 .item_card_image {
-	height: 200px;
+	width: 100%;
+	height: 0;
+	padding-bottom: 56.25%;
 	background-size: cover;
 	background-color: #CCCCCC;
 	opacity: 0.7;
 }
 .item_title {
-	width: 100%;
-	height: 60px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	font-size: 26px;
 	font-weight: bold;
 	color: #333;
