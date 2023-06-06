@@ -1,7 +1,7 @@
 import axios from "axios"
 
 var instance = axios.create({
-	baseURL: 'http://0.0.0.0:8888/api', //服务器接口地址
+	baseURL: '/api/', //服务器接口地址
 	timeout: 250000
 })
 

@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { httpGet } from '@/utils/http'
 import Navigator from '@/components/Navigator.vue'
 import WebsiteInfo from '@/components/WebsiteInfo.vue'
 
@@ -30,7 +31,14 @@ export default {
       return (() => {
         this.screenWidth = document.body.clientWidth
       })()
-    }
+    };
+    httpGet('res/lang/zh.json').then((res) => {
+      this.$i18n.mergeLocaleMessage('zh', res.data)
+    })
+
+    httpGet('res/lang/en.json').then((res) => {
+      this.$i18n.mergeLocaleMessage('en', res.data)
+    })
   },
   data() {
     return {
