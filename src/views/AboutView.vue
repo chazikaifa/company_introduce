@@ -1,13 +1,12 @@
 <template>
   <div class="about">
-    <Title :isMobile="isMobile" :img="'banner_about.jpg'" :text="$t('navigator.introduce')"></Title>
+    <Title :isMobile="isMobile" img="introduce.banner_img" :text="$t('navigator.introduce')"></Title>
     <ScrollItem 
     	v-for="item in items" 
     	:isMobile="isMobile" 
     	:title="$t(item.title)" 
     	:text="$t(item.text)" 
     	:img="$t(item.img)"
-    	:color="$t(item.color)"
     	:type="$t(item.type)"/>
   </div>
 </template>
@@ -25,32 +24,52 @@ export default {
 		Title,
 		ScrollItem
 	},
+	mounted() {
+    this.maxTry = 10;
+    this.asyncGetData();
+  },
+  beforeDestroy() {
+    if(this.timer != null) {
+      clearTimeout(this.timer)
+    }
+  },
 	data() {
 		return {
-			items: [
-				{
-					title: 'introduce.abstract.title',
-					text: 'introduce.abstract.text',
-					img: 'introduce.abstract.img',
-					type: 'introduce.abstract.type',
-					color: 'introduce.abstract.color'
-				},
-				{
-					title: 'introduce.section1.title',
-					text: 'introduce.section1.text',
-					img: 'introduce.section1.img',
-					type: 'introduce.section1.type',
-					color: 'introduce.section1.color'
-				},
-				{
-					title: 'introduce.section2.title',
-					text: 'introduce.section2.text',
-					img: 'introduce.section2.img',
-					type: 'introduce.section2.type',
-					color: 'introduce.section2.color'
-				}
-			]
+			items: [],
+			maxTry: 10,
+      interval: 200,
+      timer: null
 		}
+	},
+	methods: {
+		processRawData: function() {
+      this.items = []
+      for(let i in this.$t("introduce.list")) {
+        let temp = {
+        	title: `introduce.list[${i}].title`,
+          text: `introduce.list[${i}].text`,
+          img: `introduce.list[${i}].img`,
+          type: `introduce.list[${i}].type`,
+        };
+        this.items.push(temp)
+      }
+    },
+    asyncGetData: function() {
+      if(this.timer != null) {
+        clearTimeout(this.timer)
+      }
+      this.timer = null;
+      if(typeof(this.$t("introduce.list")) == "string") {
+        if(this.maxTry > 0) {
+          this.maxTry--;
+          this.timer = setTimeout(this.asyncGetData, this.interval);
+        } else {
+          this.$message.error(this.$t("introduce.error"))
+        }
+      } else {
+        this.processRawData()
+      }
+    },
 	}
 }
 </script>

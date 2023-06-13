@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll_item" :mobile="isMobile" :style="style" :type="type">
+  <div class="scroll_item" :mobile="isMobile" :style="'background-image: url(' + GD.server.host + $t(img) + ')'" :type="type">
   	<div class="title" >{{title}}</div>
   	<el-divider></el-divider>
   	<div class="content" v-html="content"></div>
@@ -15,21 +15,16 @@ export default {
 		type: String,
 		title: String,
 		text: String,
-		img: String,
-		color: String
+		img: String
 	},
 	components: {
 	},
 	data() {
 		return {
-			picture: null,
 			content: '',
-			style: ''
 		}
 	},
-	created(){
-		console.log(this.color);
-	},
+	created(){},
 	watch: {
     text: {
       handler: function (val, oldVal) {
@@ -38,19 +33,6 @@ export default {
 					this.content = '';
 					for(let pragh of praghs) {
 						this.content =  ` ${this.content} <p> ${pragh} </p> `
-					}
-				}
-      },
-      immediate: true
-    },
-    img: {
-      handler: function (val, oldVal) {
-      	if(val) {
-					try {
-						this.picture = require('../assets/' + val);
-						this.style = 'background-image: url(' + this.picture + ')'
-					} catch (err) {
-						console.log(`[ScrollItem-${this.title}] Cannot find img ${val}`)
 					}
 				}
       },

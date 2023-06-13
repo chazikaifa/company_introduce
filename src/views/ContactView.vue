@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <Title :isMobile="isMobile" :img="'banner_contact.png'" :text="$t('navigator.contact')"></Title>
+    <Title :isMobile="isMobile" img="contact.banner_img" :text="$t('navigator.contact')"></Title>
     <el-card class="contact_detail_container" :mobile="isMobile">
     	<div slot="header">
     		<span class="contact_title">{{$t('contact.title')}}</span>

@@ -1,8 +1,11 @@
 import axios from "axios"
 
 var instance = axios.create({
-	baseURL: '/api/', //服务器接口地址
-	timeout: 250000
+	baseURL: '/server', //服务器接口地址
+	timeout: 250000,
+	headers: {
+  	'Cache-Control': 'no-cache'
+  }
 })
 
 const httpGet = (url, data) => {

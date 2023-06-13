@@ -5,8 +5,9 @@
     class="home">
     <el-carousel-item  
     	class="item" v-for="item in carousel_list" 
-    	:style="'background-image: url(' + item.img + ')'"
-    	:key="item.text">
+    	:style="'background-image: url( ' + GD.server.host + $t(item.img) + ')'"
+    	:key="item.text"
+      @click.native="toProduct(item.id)">
   		<div class="item_text" :mobile="isMobile">{{$t(item.text)}}</div>
     </el-carousel-item>
   </el-carousel>
@@ -20,23 +21,60 @@ export default {
   },
   components: {
   },
+  mounted() {
+    this.maxTry = 10;
+    this.asyncGetData();
+  },
+  beforeDestroy() {
+    if(this.timer != null) {
+      clearTimeout(this.timer)
+    }
+  },
   data() {
   	return {
-  		carousel_list:[
-  			{
-  				img: require('../assets/index1.jpg'),
-  				text:'index.card1',
-  			},
-  			{
-  				img: require('../assets/index2.jpg'),
-  				text:'index.card2'
-  			},
-  			{
-  				img: require('../assets/index3.jpg'),
-  				text:'index.card3'
-  			},
-  		]
+  		carousel_list:[],
+      maxTry: 10,
+      interval: 200,
+      timer: null
   	}
+  },
+  methods: {
+    processRawData: function() {
+      this.carousel_list = []
+      for(let i in this.$t("index.list")) {
+        let temp = {
+          id: parseInt(i) + 1,
+          text: `index.list[${i}].text`,
+          img: `index.list[${i}].img`
+        };
+        this.carousel_list.push(temp)
+      }
+    },
+    asyncGetData: function() {
+      if(this.timer != null) {
+        clearTimeout(this.timer)
+      }
+      this.timer = null;
+      if(typeof(this.$t("index.list")) == "string") {
+        if(this.maxTry > 0) {
+          this.maxTry--;
+          this.timer = setTimeout(this.asyncGetData, this.interval);
+        } else {
+          this.$message.error(this.$t("index.error"))
+        }
+      } else {
+        this.processRawData()
+      }
+    },
+    toProduct: function(id) {
+      let to = {
+        name: 'productItem',
+        params: {
+          id: id
+        }
+      };
+      this.$router.push(to);
+    },
   }
 }
 </script>

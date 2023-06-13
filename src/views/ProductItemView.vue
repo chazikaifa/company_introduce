@@ -15,21 +15,6 @@
 import { httpGet } from '@/utils/http'
 import Title from '@/components/Title.vue'
 
-const dumpData = {
-	img: '.jpg',
-	name: '产品',
-	description: '随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。\r\n随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。随便写点什么填充一下，到时候全部要替换掉的英文就不写了。'
-}
-
-const dumpDataList = []
-for(let i = 0; i < 6; i++){
-	let temp = {}
-	temp.img = Math.ceil(Math.random() * 3) + dumpData.img;
-	temp.name = dumpData.name + (i + 1) + '号';
-	temp.description = temp.name + ':' + dumpData.description
-	dumpDataList.push(temp)
-}
-
 export default {	
 	name: 'ProductItemView',
 	props: {
@@ -49,15 +34,11 @@ export default {
 		}
 	},
 	created() {
-		// this.loading = this.$loading({
-		// 	lock: true,
-		// 	text: this.$t('product_item.loading'),
-		// 	spinner: 'el-icon-loading',
-  //     background: 'rgba(0, 0, 0, 0.7)'
-		// })
 		this.$router.onReady(()=>{
-			this.item = this.$route.params.product
-			this.item.content = this.solveDescription(this.item.description)
+			let index = parseInt(this.$route.params.id) - 1
+			this.item.name = this.$t(`product.list[${index}].name`)
+			this.item.img = this.$t(`product.list[${index}].img`)
+			this.item.content = this.solveDescription(this.$t(`product.list[${index}].description`))
 			this.showSkeleton = false;
 		})
 	},

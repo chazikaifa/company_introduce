@@ -1,7 +1,7 @@
 module.exports = {
-  // title: {
-  //   company_name: '广州杰凯纸品包装有限公司'
-  // },
+  title: {
+    company_name: '广州杰凯纸品包装有限公司'
+  },
   // navigator:{
   //   switch:'English',
   //   index: '首页',
@@ -9,15 +9,13 @@ module.exports = {
   //   products: '产品介绍',
   //   contact: '联系我们'
   // },
-  // footer:{
-  //   company_name:'广州杰凯纸品包装有限公司版权所有', 
-  //   icp:'粤ICP备XXXXXXX号'
-  // },
-  // index:{
-  //   card1: '测试1',
-  //   card2: '测试2',
-  //   card3: '测试3',
-  // },
+  footer:{
+    "company_name":"广州杰凯纸品包装有限公司版权所有", 
+    "icp":"粤ICP备2023061414号"
+  },
+  index:{
+    error: "[首页]无法获取首页数据，请稍后再试！"
+  },
   // introduce: {
   //   abstract: {
   //     type: 'text',
@@ -69,8 +67,7 @@ module.exports = {
   //     submit_success:'提交成功！',
   //   },
   // },
-  // product: {
-  //   httpFail: '无法获取产品列表，请稍后再试！',
-  //   loading: '加载中...',
-  // },
+  product: {
+    error: "[产品页]无法获取产品页数据，请稍后再试！"
+  }
 }

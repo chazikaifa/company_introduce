@@ -1,10 +1,10 @@
 <template>
   <div class="container">
   	<el-row v-show="!isMobile">
-  		<el-col :span="2">
-  			<img class="nav_logo" alt="Vue logo" src="../assets/logo.png" @click="navSelect('1')">
+  		<el-col :span="4" class="logo_container">
+  			<img class="nav_logo" alt="Vue logo" src="../assets/logo_with_title.png" @click="navSelect('1')">
   		</el-col>
-  		<el-col :span="20">
+  		<el-col :span="16">
   			<el-menu class="nav_bar" :default-active="index" mode="horizontal" @select="navSelect">
   				<!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
   				<el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
@@ -12,7 +12,7 @@
   				<el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
   			</el-menu>
   		</el-col>
-  		<el-col :span="2" class="language">
+  		<el-col :span="4" class="language">
   			<el-button class="btn_language" type="text" @click="changeLan">{{$t("navigator.switch")}}</el-button>
   		</el-col>
   	</el-row>
@@ -20,7 +20,7 @@
   		<el-col class="mobile_btn_container" :span="6">
   			<i class="el-icon-s-grid btn_menu" @click="changeOpen"></i>
   		</el-col>
-  		<el-col :span="12" class="nav_mobile_logo_container"><img class="nav_logo" alt="Vue logo" src="../assets/logo.png" @click="navSelect('1')"></el-col>
+  		<el-col :span="12" class="nav_mobile_logo_container"><img class="nav_logo" alt="Vue logo" src="../assets/logo_with_title.png" @click="navSelect('1')"></el-col>
   		<el-col :span="6" class="language">
   			<el-button class="btn_language" type="text" @click="changeLan">{{$t("navigator.switch")}}</el-button>
   		</el-col>
@@ -126,6 +126,9 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.logo_container {
+  justify-content: flex-start;
 }
 .nav_logo{
 	display: block;

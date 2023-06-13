@@ -1,7 +1,7 @@
 module.exports = {
-  // title: {
-  //   company_name: 'Guangzhou Jiekai Paper Packaging Co., Ltd'
-  // },
+  title: {
+    company_name: 'Guangzhou Jiekai Paper Packaging Co., Ltd'
+  },
   // navigator:{
   //   switch:'中文',
   //   index: 'Index',
@@ -9,15 +9,13 @@ module.exports = {
   //   products: 'Products',
   //   contact: 'Contact Us'
   // },
-  // footer:{
-  //   company_name:'Guangzhou Jiekai Paper Packaging Co., Ltd',
-  //   icp:'粤ICP备XXXXXXX号'
-  // },
-  // index:{
-  //   card1: 'test1',
-  //   card2: 'test2',
-  //   card3: 'test3',
-  // },
+  footer:{
+    "company_name":"Guangzhou Jiekai Paper Packaging Co., Ltd",
+    "icp":"粤ICP备2023061414号"
+  },
+  index:{
+    error: "[Index]Fail to get Index data. Please try again later!"
+  },
   // introduce: {
   //   abstract: {
   //     title: 'Introduction',
@@ -69,8 +67,7 @@ module.exports = {
   //     submit_success:'Submit success!'
   //   },
   // },
-  // product: {
-  //   httpFail: 'Fail To get product list. Please try again later!',
-  //   loading: 'Loading...',
-  // },
+  product: {
+    error: "[Product]Fail to get product data. Please try again later!"
+  },
 }

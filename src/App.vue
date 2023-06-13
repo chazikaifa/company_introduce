@@ -17,6 +17,7 @@
 import { httpGet } from '@/utils/http'
 import Navigator from '@/components/Navigator.vue'
 import WebsiteInfo from '@/components/WebsiteInfo.vue'
+import { Loading } from 'element-ui';
 
 export default {
   name: 'App',
@@ -25,25 +26,35 @@ export default {
     WebsiteInfo
   },
   mounted() {
-    document.title = this.$t('title.company_name');
+    this.loading = Loading.service({ fullscreen: true});
+
     this.screenWidth = document.body.clientWidth
     window.onresize = () => {
       return (() => {
         this.screenWidth = document.body.clientWidth
       })()
     };
-    httpGet('res/lang/zh.json').then((res) => {
-      this.$i18n.mergeLocaleMessage('zh', res.data)
+
+    httpGet('/res/lang/zh.json').then((res) => {
+      this.$i18n.mergeLocaleMessage('zh', res.data);
+      httpGet('/res/lang/en.json').then((res) => {
+        this.$i18n.mergeLocaleMessage('en', res.data);
+        document.title = this.$t('title.company_name');
+        this.loading.close();
+      }).catch((err) => {
+        this.$message.error(err)
+      })
+    }).catch((err) => {
+      this.$message.error(err)
     })
 
-    httpGet('res/lang/en.json').then((res) => {
-      this.$i18n.mergeLocaleMessage('en', res.data)
-    })
+    
   },
   data() {
     return {
       screenWidth: null,
       isMobile: false,
+      loading: true
     }
   },
   methods:{

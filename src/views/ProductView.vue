@@ -1,20 +1,20 @@
 <template>
   <div class="product">
-    <Title :isMobile="isMobile" :img="'banner_product.jpg'" :text="$t('navigator.products')"></Title>
+    <Title :isMobile="isMobile" img="product.banner_img" :text="$t('navigator.products')"></Title>
     <div class="product_list">
     	<el-row v-if="!isMobile" v-for="product_row in product_list">
 	    	<el-col :span="12" v-for="product in product_row">
-	    		<el-card class="item_card" shadow="hover" @click.native="toProduct(product)">
-	    			<div class="item_title" slot="header">{{product.name}}</div>
-	    			<div class="item_card_image" :style="'background-image: url(' + product.picture + ')'"></div>
+	    		<el-card class="item_card" shadow="hover" @click.native="toProduct(product.id)">
+	    			<div class="item_title" slot="header">{{$t(product.name)}}</div>
+	    			<div class="item_card_image" :style="'background-image: url(' + GD.server.host + $t(product.img) + ')'"></div>
 	    		</el-card>
 	    	</el-col>
 	    </el-row>
 	    <el-row v-if="isMobile">
 	    	<el-col :span="24" v-for="product in products">
-	    		<el-card class="item_card mobile" shadow="hover" @click.native="toProduct(product)">
-	    			<div class="item_title" slot="header">{{product.name}}</div>
-	    			<div class="item_card_image" :style="'background-image: url(' + product.picture + ')'"></div>
+	    		<el-card class="item_card mobile" shadow="hover" @click.native="toProduct(product.id)">
+	    			<div class="item_title" slot="header">{{$t(product.name)}}</div>
+	    			<div class="item_card_image" :style="'background-image: url(' + GD.server.host + $t(product.img) + ')'"></div>
 	    		</el-card>
 	    	</el-col>
 	    </el-row>
@@ -23,9 +23,7 @@
 </template>
 
 <script>
-import Title from '@/components/Title.vue'		
-import { httpGet } from '@/utils/http'
-import { getDumpProducts } from '@/utils/dumpData'
+import Title from '@/components/Title.vue'
 
 export default {	
 	name: 'ProductView',
@@ -39,53 +37,59 @@ export default {
 		return {
 			products: [],
 			product_list: [],
-			loading: null,
+			maxTry: 10,
+      interval: 200,
+      timer: null
 		}
 	},
 	created() {
-		this.loading = this.$loading({
-			lock: true,
-			text: this.$t('product.loading'),
-			spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)'
-		})
-		// httpGet('products/')
-		// 	.then((res)=>{
-		// 		console.log(res);
-		// 		this.loading = false;
-		// 	})
-		// 	.catch((err)=>{
-		// 		console.log("[Products]" + err)
-		// 		this.$message.error(this.$t('product.httpFail'))
-		// 	})
-		setTimeout(()=>{
-			this.products = [...getDumpProducts(6)];
-			for(let i in this.products) {
-				this.products[i].picture = require('../assets/' + this.products[i].img)
-			}
-			this.solveProducts();
-			this.loading.close();
-		}, 300)
+		this.asyncGetData();
 	},
 	methods: {
-		toProduct: function(product) {
+		toProduct: function(id) {
 			let to = {
 				name: 'productItem',
 				params: {
-					product: product
+					id: this.$t(id)
 				}
 			};
 			this.$router.push(to);
 		},
+		asyncGetData: function() {
+      if(this.timer != null) {
+        clearTimeout(this.timer)
+      }
+      this.timer = null;
+      if(typeof(this.$t("product.list")) == "string") {
+        if(this.maxTry > 0) {
+          this.maxTry--;
+          this.timer = setTimeout(this.asyncGetData, this.interval);
+        } else {
+          this.$message.error(this.$t("product.error"))
+        }
+      } else {
+        this.solveProducts()
+      }
+    },
 		solveProducts: function() {
 			this.product_list = [];
-			for(let i = 0; i < this.products.length; i++) {
-				if(i % 2 == 0) {
-					this.product_list.push([this.products[i]])
+			this.products = [];
+
+			for(let i in this.$t("product.list")) {
+        let temp = {
+        	id: `product.list[${i}].id`,
+          name: `product.list[${i}].name`,
+          img: `product.list[${i}].img`,
+          description: `product.list[${i}].description`,
+        };
+        this.products.push(temp);
+        
+        if(parseInt(i) % 2 == 0) {
+					this.product_list.push([temp]);
 				} else {
-					this.product_list[this.product_list.length - 1].push(this.products[i])
+					this.product_list[this.product_list.length - 1].push(temp);
 				}
-			}
+      }
 		}
 	}
 }

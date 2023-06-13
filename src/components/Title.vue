@@ -1,7 +1,7 @@
 <template>
 	<div 
 		:class="isMobile? 'banner_title mobile' : 'banner_title'"
-		:style="'background-image: url(' + picture + ')'">
+		:style="'background-image: url(' + GD.server.host + $t(img) + ')'">
 		<div class="banner_text">{{text}}</div>
 		<span></span>
 	</div>
@@ -22,21 +22,6 @@ export default {
 			picture: null
 		}
 	},
-	watch: {
-    img: {
-      handler: function (val, oldVal) {
-        if(val) {
-					try {
-						this.picture = require('../assets/' + val);
-					} catch (err) {
-						console.log(`[Title-${this.text}] Cannot find img ${val}`)
-					}
-				}
-      },
-      immediate: true
-    },
-  }
-
 }
 </script>
 
