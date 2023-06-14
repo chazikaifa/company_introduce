@@ -6,7 +6,7 @@
     	:isMobile="isMobile" 
     	:title="$t(item.title)" 
     	:text="$t(item.text)" 
-    	:img="$t(item.img)"
+    	:img="item.img"
     	:type="$t(item.type)"/>
   </div>
 </template>

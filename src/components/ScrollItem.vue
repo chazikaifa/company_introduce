@@ -1,5 +1,10 @@
+
 <template>
-  <div class="scroll_item" :mobile="isMobile" :style="'background-image: url(' + GD.server.host + $t(img) + ')'" :type="type">
+  <div 
+  	class="scroll_item"
+   	:mobile="isMobile" 
+   	:style="$t(img) != '' ? 'background-image: url(' + $t('server.host') + $t(img) + ')': ''" 
+   	:type="type">
   	<div class="title" >{{title}}</div>
   	<el-divider></el-divider>
   	<div class="content" v-html="content"></div>

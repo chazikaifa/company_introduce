@@ -37,7 +37,7 @@ export default {
 		this.$router.onReady(()=>{
 			let index = parseInt(this.$route.params.id) - 1
 			this.item.name = this.$t(`product.list[${index}].name`)
-			this.item.img = this.$t(`product.list[${index}].img`)
+			this.item.img = `product.list[${index}].img`
 			this.item.content = this.solveDescription(this.$t(`product.list[${index}].description`))
 			this.showSkeleton = false;
 		})

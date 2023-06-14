@@ -1,7 +1,7 @@
 <template>
 	<div 
 		:class="isMobile? 'banner_title mobile' : 'banner_title'"
-		:style="'background-image: url(' + GD.server.host + $t(img) + ')'">
+		:style="'background-image: url(' + $t('server.host') + $t(img) + ')'">
 		<div class="banner_text">{{text}}</div>
 		<span></span>
 	</div>

@@ -10,13 +10,10 @@ module.exports = {
 
   devServer: {
   	proxy: {
-  		'/server' : {
-        target: 'http://127.0.0.1/',
+  		'/' : {
+        target: 'http://8.134.187.183/',
         ws: true,
         changeOrigin: true,
-        pathRewrite: {
-          '^/server' : '',
-        }
       }
   	}
   }

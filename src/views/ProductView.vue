@@ -6,7 +6,7 @@
 	    	<el-col :span="12" v-for="product in product_row">
 	    		<el-card class="item_card" shadow="hover" @click.native="toProduct(product.id)">
 	    			<div class="item_title" slot="header">{{$t(product.name)}}</div>
-	    			<div class="item_card_image" :style="'background-image: url(' + GD.server.host + $t(product.img) + ')'"></div>
+	    			<div class="item_card_image" :style="'background-image: url(' + $t('server.host') + $t(product.img) + ')'"></div>
 	    		</el-card>
 	    	</el-col>
 	    </el-row>
@@ -14,7 +14,7 @@
 	    	<el-col :span="24" v-for="product in products">
 	    		<el-card class="item_card mobile" shadow="hover" @click.native="toProduct(product.id)">
 	    			<div class="item_title" slot="header">{{$t(product.name)}}</div>
-	    			<div class="item_card_image" :style="'background-image: url(' + GD.server.host + $t(product.img) + ')'"></div>
+	    			<div class="item_card_image" :style="'background-image: url(' + $t('server.host') + $t(product.img) + ')'"></div>
 	    		</el-card>
 	    	</el-col>
 	    </el-row>

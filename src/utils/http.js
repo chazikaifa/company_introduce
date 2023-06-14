@@ -1,7 +1,7 @@
 import axios from "axios"
 
 var instance = axios.create({
-	baseURL: '/server', //服务器接口地址
+	baseURL: '/', 
 	timeout: 250000,
 	headers: {
   	'Cache-Control': 'no-cache'

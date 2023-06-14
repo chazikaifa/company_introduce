@@ -5,7 +5,7 @@
     class="home">
     <el-carousel-item  
     	class="item" v-for="item in carousel_list" 
-    	:style="'background-image: url( ' + GD.server.host + $t(item.img) + ')'"
+    	:style="'background-image: url( ' + $t('server.host') + $t(item.img) + ')'"
     	:key="item.text"
       @click.native="toProduct(item.id)">
   		<div class="item_text" :mobile="isMobile">{{$t(item.text)}}</div>

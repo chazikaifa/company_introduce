@@ -12,9 +12,6 @@ Vue.use(BaiduMap, {
 
 Vue.config.productionTip = false
 
-import GD from '@/utils/globalData'
-Vue.prototype.GD = GD;
-
 Vue.prototype.changeLanguage = function() {
 	let lan;
 	switch(localStorage.getItem('languageSet')) {
