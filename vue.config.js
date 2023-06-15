@@ -9,12 +9,12 @@ module.exports = {
   },
 
   devServer: {
-  	proxy: {
-  		'/' : {
+    proxy: {
+      '/' : {
         target: 'http://8.134.187.183/',
         ws: true,
         changeOrigin: true,
       }
-  	}
+    }
   }
 }

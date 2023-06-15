@@ -4,11 +4,11 @@
     trigger = "click"
     class="home">
     <el-carousel-item  
-    	class="item" v-for="item in carousel_list" 
-    	:style="'background-image: url( ' + $t('server.host') + $t(item.img) + ')'"
-    	:key="item.text"
+      class="item" v-for="item in carousel_list" 
+      :style="'background-image: url( ' + $t('server.host') + $t(item.img) + ')'"
+      :key="item.text"
       @click.native="toProduct(item.id)">
-  		<div class="item_text" :mobile="isMobile">{{$t(item.text)}}</div>
+      <div class="item_text" :mobile="isMobile">{{$t(item.text)}}</div>
     </el-carousel-item>
   </el-carousel>
 </template>
@@ -17,7 +17,7 @@
 export default {
   name: 'HomeView',
   props: {
-  	isMobile: Boolean
+    isMobile: Boolean
   },
   components: {
   },
@@ -31,12 +31,12 @@ export default {
     }
   },
   data() {
-  	return {
-  		carousel_list:[],
+    return {
+      carousel_list:[],
       maxTry: 10,
       interval: 200,
       timer: null
-  	}
+    }
   },
   methods: {
     processRawData: function() {
@@ -81,20 +81,20 @@ export default {
 
 <style scoped="">
 .home{
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 .item{
-	background-size: cover;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   opacity: 0.80;
 }
 .item_text{
-	color: #FFF;
-	font-size: 56px;
+  color: #FFF;
+  font-size: 56px;
   mix-blend-mode: difference;
 }
 .item_text[mobile] {

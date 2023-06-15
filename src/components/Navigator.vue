@@ -1,38 +1,38 @@
 <template>
   <div class="container">
-  	<el-row v-show="!isMobile">
-  		<el-col :span="4" class="logo_container">
-  			<img class="nav_logo" alt="Vue logo" src="../assets/logo_with_title.png" @click="navSelect('1')">
-  		</el-col>
-  		<el-col :span="16">
-  			<el-menu class="nav_bar" :default-active="index" mode="horizontal" @select="navSelect">
-  				<!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
-  				<el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
-  				<el-menu-item index="3">{{$t("navigator.products")}}</el-menu-item>
-  				<el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
-  			</el-menu>
-  		</el-col>
-  		<el-col :span="4" class="language">
-  			<el-button class="btn_language" type="text" @click="changeLan">{{$t("navigator.switch")}}</el-button>
-  		</el-col>
-  	</el-row>
-  	<el-row v-show="isMobile">
-  		<el-col class="mobile_btn_container" :span="6">
-  			<i class="el-icon-s-grid btn_menu" @click="changeOpen"></i>
-  		</el-col>
-  		<el-col :span="12" class="nav_mobile_logo_container"><img class="nav_logo" alt="Vue logo" src="../assets/logo_with_title.png" @click="navSelect('1')"></el-col>
-  		<el-col :span="6" class="language">
-  			<el-button class="btn_language" type="text" @click="changeLan">{{$t("navigator.switch")}}</el-button>
-  		</el-col>
-  	</el-row>
-  	<transition name="el-zoom-in-top" :duration="1500">
-	  	<el-menu key="mobile_nav" v-show="isMobile && isOpen" class="mobile_nav" :default-active="index" @select="navSelect">
-				<!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
-				<el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
-				<el-menu-item index="3">{{$t("navigator.products")}}</el-menu-item>
-				<el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
-			</el-menu>
-	</transition>
+    <el-row v-show="!isMobile">
+      <el-col :span="4" class="logo_container">
+        <img class="nav_logo" alt="Vue logo" src="../assets/logo_with_title.png" @click="navSelect('1')">
+      </el-col>
+      <el-col :span="16">
+        <el-menu class="nav_bar" :default-active="index" mode="horizontal" @select="navSelect">
+          <!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
+          <el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
+          <el-menu-item index="3">{{$t("navigator.products")}}</el-menu-item>
+          <el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
+        </el-menu>
+      </el-col>
+      <el-col :span="4" class="language">
+        <el-button class="btn_language" type="text" @click="changeLan">{{$t("navigator.switch")}}</el-button>
+      </el-col>
+    </el-row>
+    <el-row v-show="isMobile">
+      <el-col class="mobile_btn_container" :span="6">
+        <i class="el-icon-s-grid btn_menu" @click="changeOpen"></i>
+      </el-col>
+      <el-col :span="12" class="nav_mobile_logo_container"><img class="nav_logo" alt="Vue logo" src="../assets/logo_with_title.png" @click="navSelect('1')"></el-col>
+      <el-col :span="6" class="language">
+        <el-button class="btn_language" type="text" @click="changeLan">{{$t("navigator.switch")}}</el-button>
+      </el-col>
+    </el-row>
+    <transition name="el-zoom-in-top" :duration="1500">
+      <el-menu key="mobile_nav" v-show="isMobile && isOpen" class="mobile_nav" :default-active="index" @select="navSelect">
+        <!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
+        <el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
+        <el-menu-item index="3">{{$t("navigator.products")}}</el-menu-item>
+        <el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
+      </el-menu>
+  </transition>
   </div>
 </template>
 
@@ -40,26 +40,26 @@
 export default {
   name: 'Navigator',
   props: {
-  	isMobile: Boolean
+    isMobile: Boolean
   },
   data() {
-  	return {
-  		index: '1',
-  		isOpen: false
-  	}
+    return {
+      index: '1',
+      isOpen: false
+    }
   },
   mounted() {
   },
   methods: {
-  	changeLan: function() {
-  		this.changeLanguage()
-  	},
-  	changeOpen: function() {
-  		this.isOpen = !this.isOpen;
-  	},
-  	navSelect: function(key) {
+    changeLan: function() {
+      this.changeLanguage()
+    },
+    changeOpen: function() {
+      this.isOpen = !this.isOpen;
+    },
+    navSelect: function(key) {
       this.isOpen = false;
-  		this.index = key;
+      this.index = key;
       let to = {};
       switch(key) {
         //case '1':
@@ -79,7 +79,7 @@ export default {
       }
       if(this.$route.name == to.name) return;
       this.$router.push(to);
-  	}
+    }
   },
   watch: {
     isMobile: {
@@ -115,63 +115,63 @@ export default {
 
 <style scoped>
 .container {
-	height: 100%;
+  height: 100%;
 }
 .el-row {
-	height: 100%;
+  height: 100%;
 }
 .el-col {
-	overflow: hidden;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .logo_container {
   justify-content: flex-start;
 }
 .nav_logo{
-	display: block;
-	height: 100%;
+  display: block;
+  height: 100%;
 }
 .nav_mobile_logo_container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nav_bar{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
 }
 .nav_bar .el-menu-item{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100px;
-	font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  font-size: 15px;
 }
 .language{
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .btn_language{
-	margin-right: 5px;
+  margin-right: 5px;
 }
 .mobile_btn_container {
-	justify-content: flex-start;
+  justify-content: flex-start;
 }
 .btn_menu{
-	font-size: 30px;
+  font-size: 30px;
 }
 .mobile_nav {
-	position: absolute;
-	top: 70px;
-	left: 0;
-	right: 0;
-	bottom: 0;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 999;
 }
 </style>

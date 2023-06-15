@@ -7,26 +7,26 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 import BaiduMap from 'vue-baidu-map'
 Vue.use(BaiduMap, {
-	ak: 'q5R0lA8y63yYITe3S8ZnOMRXtIIv79lz'
+  ak: 'q5R0lA8y63yYITe3S8ZnOMRXtIIv79lz'
 })
 
 Vue.config.productionTip = false
 
 Vue.prototype.changeLanguage = function() {
-	let lan;
-	switch(localStorage.getItem('languageSet')) {
-		case "zh":
-			lan = "en"
-			break;
-		case "en":
-			lan = "zh"
-			break;
-		default:
-			lan = "en"
-	}
-	this.$i18n.locale = lan;
-	document.title = this.$t('title.company_name');
-	localStorage.setItem('languageSet', lan)
+  let lan;
+  switch(localStorage.getItem('languageSet')) {
+    case "zh":
+      lan = "en"
+      break;
+    case "en":
+      lan = "zh"
+      break;
+    default:
+      lan = "en"
+  }
+  this.$i18n.locale = lan;
+  document.title = this.$t('title.company_name');
+  localStorage.setItem('languageSet', lan)
 }
 
 new Vue({
