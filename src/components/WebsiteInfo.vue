@@ -2,7 +2,7 @@
   <div class="footer_container">
     <el-row v-if="!isMobile">
       <el-col class="footer_item_horizontal footer_logo" :span="16">
-        <img class="logo" alt="Vue logo" src="../assets/logo.png">
+        <img class="logo" alt="Vue logo" :src="$t('server.host') + $t('footer.logo')">
         <div class="footer_text">{{$t("footer.company_name")}}</div>
       </el-col>
       <el-col class="footer_item_horizontal footer_icp" :span="8">

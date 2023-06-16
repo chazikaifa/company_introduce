@@ -4,12 +4,13 @@
   <el-card class="contact_detail_container" :mobile="isMobile">
     <div slot="header">
       <span class="contact_title">{{$t('contact.title')}}</span>
-      <el-button style="float: right; padding: 8px" type="primary" @click="online_msg">{{$t('contact.online_msg')}}</el-button>
+      <el-button style="float: right; padding: 8px" type="primary" @click="online_msg" :loading="token_loading">{{$t('contact.online_msg')}}</el-button>
       <el-dialog
         :visible.sync="showDialog"
         :title="$t('contact.online_msg')"
         :close-on-click-modal="false"
         :close-on-press-escape="false"
+        :fullscreen = "isMobile"
         :show-close="!submitting">
         <el-form :model="form">
           <el-form-item :label="$t('contact.form.name')" required>
@@ -60,7 +61,8 @@
 
 <script>
 import Title from '@/components/Title.vue'    
-import { httpPost } from '@/utils/http'
+import { httpGet } from '@/utils/http'
+import { sendMsg } from '@/utils/weixin'
 
 export default {  
   name: 'ContactView',
@@ -81,8 +83,22 @@ export default {
         phone: '',
         message: ''
       },
-      submitting: false
+      submitting: false,
+      token: null,
+      token_loading: true,
     }
+  },
+  created() {
+    httpGet('/res/wechat/token.json').then((res) => {
+      if(res.data && res.data.errmsg == "ok") {
+        this.token = res.data.access_token;
+        this.token_loading = false;
+      } else {
+        console.error("微信token获取失败： " + res.data.errmsg)
+      }
+    }).catch((err) =>{
+      console.error("微信token获取失败：" + err)
+    })
   },
   methods:{
     online_msg: function() {
@@ -109,23 +125,32 @@ export default {
       }
     },
     upload_message: function() {
-      // httpPost('onlinemMsg', this.form)
-      // .then((res)=>{
-      //  console.log(res);
-      // })
-      // .catch((err) => {
-      //  console.log(err);
-      // })
+      let user = this.$t("contact.inform_users")
 
-      let callback = ()=>{
-        this.submitting = false;
-        this.showDialog = false;
-        this.form_init();
-        this.$message.success(this.$t('contact.form.submit_success'))
+      //若获取的字符串等于字段名说明该字段有问题
+      if(user == "contact.inform_users") {
+        console.error("企业微信推送对象获取失败")
+        this.$message.error(this.$t('contact.form.submit_fail'))
+        return;
       }
-      //simulate the request
-      setTimeout(callback, 1000);
-      console.log(this.form);
+
+      let text = `收到在线留言:<br/>` + 
+                 `留言人： ${this.form.name}<br/>` +
+                 `电子邮箱： ${this.form.email}<br/>` +
+                 `联系电话： ${this.form.phone != "" ? this.form.phone : ""}<br/>` + 
+                 `留言内容： ${this.form.message}`;
+
+      sendMsg(this.token, user, text).then((res) => {
+        if(res.status == "OK") {
+          this.form_init();
+          this.showDialog = false;
+          this.$message.success(this.$t('contact.form.submit_success'))
+        } else {
+          this.$message.error(this.$t('contact.form.submit_fail') + res.errMsg)
+        }
+
+        this.submitting = false;
+      })
     }
   }
 }

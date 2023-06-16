@@ -14,7 +14,15 @@ module.exports = {
         target: 'http://8.134.187.183/',
         ws: true,
         changeOrigin: true,
+      },
+      '/wechat' : {
+        target: 'https://qyapi.weixin.qq.com/',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite:{
+          '^/wechat': ''
+        }
       }
-    }
+    },
   }
 }

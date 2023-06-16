@@ -2,7 +2,7 @@
   <div class="container">
     <el-row v-show="!isMobile">
       <el-col :span="4" class="logo_container">
-        <img class="nav_logo" alt="Vue logo" src="../assets/logo_with_title.png" @click="navSelect('1')">
+        <img class="nav_logo" alt="Vue logo" :src="$t('server.host') + $t('title.logo')" @click="navSelect('1')">
       </el-col>
       <el-col :span="16">
         <el-menu class="nav_bar" :default-active="index" mode="horizontal" @select="navSelect">
@@ -20,7 +20,7 @@
       <el-col class="mobile_btn_container" :span="6">
         <i class="el-icon-s-grid btn_menu" @click="changeOpen"></i>
       </el-col>
-      <el-col :span="12" class="nav_mobile_logo_container"><img class="nav_logo" alt="Vue logo" src="../assets/logo_with_title.png" @click="navSelect('1')"></el-col>
+      <el-col :span="12" class="nav_mobile_logo_container"><img class="nav_logo" alt="Vue logo" :src="$t('server.host') + $t('title.logo')" @click="navSelect('1')"></el-col>
       <el-col :span="6" class="language">
         <el-button class="btn_language" type="text" @click="changeLan">{{$t("navigator.switch")}}</el-button>
       </el-col>

@@ -30,7 +30,8 @@ module.exports = {
       err_name_empty:'Name can NOT be empty!',
       err_email_empty:'Email can NOT be empty!',
       err_message_empty:'Message can NOT be empty!',
-      submit_success:'Submit success!'
+      submit_success:'Submit success!',
+      submit_fail: 'Something Went Wrong:',
     },
   },
   product: {

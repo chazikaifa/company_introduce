@@ -31,6 +31,7 @@ module.exports = {
       err_email_empty:'邮箱不能为空！',
       err_message_empty:'留言内容不能为空！',
       submit_success:'提交成功！',
+      submit_fail: '发生错误：',
     },
   },
   product: {
