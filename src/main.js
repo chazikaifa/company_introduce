@@ -9,6 +9,9 @@ import BaiduMap from 'vue-baidu-map'
 Vue.use(BaiduMap, {
   ak: 'RA7RvcXBVM4QLrHZ2Rlupjg3p5dVTdY3'
 })
+import nProgress from 'nprogress';
+import 'nprogress/nprogress.css'
+import { httpGet } from '@/utils/http'
 
 Vue.config.productionTip = false
 
@@ -29,8 +32,26 @@ Vue.prototype.changeLanguage = function() {
   localStorage.setItem('languageSet', lan)
 }
 
-new Vue({
+const app = new Vue({
   router,
   i18n,
   render: h => h(App)
-}).$mount('#app')
+})
+
+nProgress.start();
+
+httpGet('/res/lang/zh.json').then((res) => {
+  i18n.mergeLocaleMessage('zh', res.data);
+  nProgress.inc();
+  httpGet('/res/lang/en.json').then((res) => {
+    i18n.mergeLocaleMessage('en', res.data);
+    document.title = i18n.t('title.company_name');
+    app.$mount('#app')
+  }).catch((err) => {
+    console.error(err)
+  })
+}).catch((err) => {
+  console.error(err)
+}).finally(() => {
+  nProgress.done();
+})

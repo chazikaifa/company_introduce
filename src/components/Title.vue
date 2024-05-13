@@ -1,7 +1,7 @@
 <template>
   <div 
     :class="isMobile? 'banner_title mobile' : 'banner_title'"
-    :style="'background-image: url(' + $t('server.host') + $t(img) + ')'">
+    :style="'background-image: -webkit-cross-fade(var(--transparent), url(' + $t('server.host') + $t(img) + '), 60%'">
     <div class="banner_text">{{text}}</div>
     <span></span>
   </div>
@@ -35,10 +35,11 @@ export default {
   padding-left: 40px;
   flex-direction: column;
   background-color: #CCCCCC;
+  --transparent: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==);
 }
 .banner_title .banner_text {
   font-size: 30px;
-  color: #FFF;
+  color: #000;
 }
 .banner_title.mobile {
   height: 250px;

@@ -3,7 +3,7 @@
   <div 
     class="scroll_item"
     :mobile="isMobile" 
-    :style="$t(img) != '' ? 'background-image: url(' + $t('server.host') + $t(img) + ')': ''" 
+    :style="$t(img) != '' ? 'background-image: -webkit-cross-fade(var(--transparent), url(' + $t('server.host') + $t(img) + '), 60%)': ''" 
     :type="type">
     <div class="title" >{{title}}</div>
     <el-divider></el-divider>
@@ -60,6 +60,7 @@ export default {
   background-size: cover;
   isolation: isolate;
   background-color: #FFF;
+  --transparent: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==);
 }
 .scroll_item[type=image] {
   height: 500px;
@@ -71,9 +72,8 @@ export default {
 .scroll_item .title {
   margin: 0 auto;
   font-size: 34px;
-  color: #959595;
-  font-weight: 300;
-  mix-blend-mode: difference;
+  color: #333333;
+  font-weight: 400;
 }
 .scroll_item .el-divider {
   width: 120px;
@@ -84,8 +84,7 @@ export default {
 .scroll_item .content {
   margin: 48px;
   font-size: 14px;
-  color: #959595;
-  mix-blend-mode: difference;
+  color: #666666;
 }
 .scroll_item[mobile] .content {
   margin: 24px;

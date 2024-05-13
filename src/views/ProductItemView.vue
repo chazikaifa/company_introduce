@@ -12,8 +12,10 @@
 </template>
 
 <script>    
-import { httpGet } from '@/utils/http'
+import {httpGet} from '@/utils/http'
 import Title from '@/components/Title.vue'
+import { Loading } from 'element-ui';
+import mammoth from 'mammoth'
 
 export default {  
   name: 'ProductItemView',
@@ -21,16 +23,18 @@ export default {
     isMobile: Boolean
   },
   components: {
-    Title
+    Title,
   },
   data() {
     return {
       item: {
         name: '产品名称',
         img: null,
-        description: null
+        description: null,
+        type: null,
       },
       showSkeleton: true,
+      loading: null
     }
   },
   created() {
@@ -38,8 +42,32 @@ export default {
       let index = parseInt(this.$route.params.id) - 1
       this.item.name = this.$t(`product.list[${index}].name`)
       this.item.img = `product.list[${index}].img`
-      this.item.content = this.solveDescription(this.$t(`product.list[${index}].description`))
+      const filePath = this.$t(`product.list[${index}].description`).toString();
+      
+    if(filePath.match(/.*\.(htm(l?) | docx )/)) {
+      this.loading = Loading.service({ fullscreen: true});
+
+      httpGet(filePath).then(res => {
+        if(res.status === 200) {
+          if(filePath.match(/.*\.htm(l?)/)) {
+            this.item.content = res.data;
+            this.showSkeleton = false;
+            this.loading.close();
+          } else if((filePath.match(/.*\.docx/))){
+            this.getWordText(filePath)
+          }
+        } else {
+          this.$message.error(res.statusText)
+          this.showSkeleton = false;
+          this.loading.close();
+          this.loading = null;
+        }
+      })
+    } else {
+      this.item.content = filePath;
       this.showSkeleton = false;
+    }
+      
     })
   },
   methods: {
@@ -50,6 +78,26 @@ export default {
           content =  ` ${content} <p> ${pragh} </p> `
       }
       return content; 
+    },
+    getWordText(filePath) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('get',filePath, true);
+      xhr.responseType = 'arraybuffer';
+      xhr.onload = () => {
+        if(xhr.status === 200) {
+          mammoth.convertToHtml({arrayBuffer: new Uint8Array(xhr.response)}).then(
+            resHtml => {
+              this.item.content = resHtml.value
+              this.showSkeleton = false;
+            this.loading.close();
+            }
+          )
+        } else {
+          this.showSkeleton = false;
+          this.loading.close();
+        }
+      }
+      xhr.send()
     }
   }
 }

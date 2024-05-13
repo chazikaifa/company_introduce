@@ -98,9 +98,15 @@ export default {
 <style>
 .product_list {
   margin: 24px;
+  .el-row {
+    max-width: 1296px;
+    margin: 0 auto;
+  }
 }
 .item_card{
   margin: 12px;
+  cursor: pointer;
+  
 }
 .item_card .el-card__body {
   padding: 0;
