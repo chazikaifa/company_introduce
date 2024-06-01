@@ -44,7 +44,7 @@ export default {
       this.item.img = `product.list[${index}].img`
       const filePath = this.$t(`product.list[${index}].description`).toString();
       
-    if(filePath.match(/.*\.(htm(l?) | docx )/)) {
+    if(filePath.match(/.*\.(htm(l?)|(docx))$/)) {
       this.loading = Loading.service({ fullscreen: true});
 
       httpGet(filePath).then(res => {
@@ -53,7 +53,7 @@ export default {
             this.item.content = res.data;
             this.showSkeleton = false;
             this.loading.close();
-          } else if((filePath.match(/.*\.docx/))){
+          } else if((filePath.match(/.*\.docx$/))){
             this.getWordText(filePath)
           }
         } else {
