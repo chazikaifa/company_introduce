@@ -7,6 +7,7 @@ module.exports = {
     index: 'Index',
     introduce: 'About Us',
     products: 'Products',
+    blogs: 'Blogs',
     contact: 'Contact Us'
   },
   footer:{

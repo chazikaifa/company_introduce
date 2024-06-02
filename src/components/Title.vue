@@ -1,7 +1,8 @@
 <template>
   <div 
     :class="isMobile? 'banner_title mobile' : 'banner_title'"
-    :style="'background-image: -webkit-cross-fade(var(--transparent), url(' + $t('server.host') + $t(img) + '), 60%'">
+    :style="getStyle()"
+    :contain="contain">
     <div class="banner_text">{{text}}</div>
     <span></span>
   </div>
@@ -13,7 +14,8 @@ export default {
   props: {
     isMobile: Boolean,
     img: String,
-    text: String
+    text: String,
+    contain: Boolean
   },
   mounted() {
   },
@@ -22,6 +24,13 @@ export default {
       picture: null
     }
   },
+  methods: {
+    getStyle() {
+      return this.contain 
+        ? 'background-image:url(' + this.$t('server.host') + this.$t(this.img) + ')'
+        : 'background-image: -webkit-cross-fade(var(--transparent), url(' + this.$t('server.host') + this.$t(this.img) + '), 60%'
+    }
+  }
 }
 </script>
 
@@ -35,7 +44,13 @@ export default {
   padding-left: 40px;
   flex-direction: column;
   background-color: #CCCCCC;
+  background-position: center;
   --transparent: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==);
+}
+.banner_title[contain='true'] {
+  background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #fff;
 }
 .banner_title .banner_text {
   font-size: 30px;

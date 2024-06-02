@@ -27,10 +27,11 @@ else:
 	index = wb["主页"]
 	introduce = wb["关于我们"]
 	product = wb["产品介绍"]
+	blog = wb["博客"]
 	contact = wb["联系我们"]
 
-	zh = {"title": {}, "footer": {}, "index":{}, "introduce":{}, "product":{}}
-	en = {"title": {}, "footer": {}, "index":{}, "introduce":{}, "product":{}}
+	zh = {"title": {}, "footer": {}, "index":{}, "introduce":{}, "product":{}, "blog": {}}
+	en = {"title": {}, "footer": {}, "index":{}, "introduce":{}, "product":{}, "blog": {}}
 
 	print("读取工作簿[总体]")
 
@@ -102,6 +103,20 @@ else:
 		if product["B" + str(i + 1)].value != "":
 			te = {"id": str(i), "name": get_value(product["B" + str(i + 1)].value), "img": get_value(product["D" + str(i + 1)].value), "description": get_value(product["F" + str(i + 1)].value)}
 			en["product"]["list"].append(te)
+
+	zh["blog"]["list"] = []
+	en["blog"]["list"] = []
+
+	print("读取工作簿[博客]")
+
+	for i in range(1,max(len(blog["A"]), len(blog["B"]))):
+		if blog["A" + str(i + 1)].value != "":
+			tz = {"id": str(i), "name": get_value(blog["A" + str(i + 1)].value), "img": get_value(blog["C" + str(i + 1)].value), "introduction": get_value(blog["E" + str(i + 1)].value), "description": get_value(blog["G" + str(i + 1)].value)}
+			zh["blog"]["list"].append(tz)
+		if blog["B" + str(i + 1)].value != "":
+			te = {"id": str(i), "name": get_value(blog["B" + str(i + 1)].value), "img": get_value(blog["D" + str(i + 1)].value), "introduction": get_value(blog["F" + str(i + 1)].value), "description": get_value(blog["H" + str(i + 1)].value)}
+			en["blog"]["list"].append(te)
+
 
 	if not os.path.exists("./lang"):
 		os.makedirs("./lang")

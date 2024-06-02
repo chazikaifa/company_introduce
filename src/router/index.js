@@ -29,6 +29,16 @@ const routes = [
     component: () => import('@/views/ProductItemView')
   },
   {
+    path: '/blog',
+    name: 'blog',
+    component: () => import('@/views/BlogView'),
+  },
+  {
+    path: '/blogs/:id',
+    name:'blogItem',
+    component: () => import('@/views/BlogItemView')
+  },
+  {
     path: '/contact',
     name: 'contact',
     component: () => import('@/views/ContactView')

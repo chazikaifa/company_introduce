@@ -9,7 +9,8 @@
           <!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
           <el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
           <el-menu-item index="3">{{$t("navigator.products")}}</el-menu-item>
-          <el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
+          <el-menu-item index="4">{{$t("navigator.blogs")}}</el-menu-item>
+          <el-menu-item index="5">{{$t("navigator.contact")}}</el-menu-item>
         </el-menu>
       </el-col>
       <el-col :span="4" class="language">
@@ -30,7 +31,8 @@
         <!-- <el-menu-item index="1">{{$t("navigator.index")}}</el-menu-item> -->
         <el-menu-item index="2">{{$t("navigator.introduce")}}</el-menu-item>
         <el-menu-item index="3">{{$t("navigator.products")}}</el-menu-item>
-        <el-menu-item index="4">{{$t("navigator.contact")}}</el-menu-item>
+        <el-menu-item index="4">{{$t("navigator.blogs")}}</el-menu-item>
+        <el-menu-item index="5">{{$t("navigator.contact")}}</el-menu-item>
       </el-menu>
   </transition>
   </div>
@@ -72,6 +74,9 @@ export default {
           to.name = 'product'
           break;
         case '4':
+          to.name = 'blog'
+          break;
+        case '5':
           to.name = 'contact'
           break;
         default:
@@ -99,8 +104,11 @@ export default {
           case 'product':
             this.index = '3';
             break;
-          case 'contact':
+          case 'blog':
             this.index = '4';
+            break;
+          case 'contact':
+            this.index = '5';
             break;
           default:
             this.index = '1';

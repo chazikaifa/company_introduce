@@ -7,6 +7,7 @@ module.exports = {
     index: '首页',
     introduce: '关于我们',
     products: '产品介绍',
+    blogs: '博客',
     contact: '联系我们'
   },
   footer:{

@@ -1,6 +1,6 @@
 <template>
   <div class="product_item">
-    <Title :isMobile="isMobile" :img="item ? item.img : null" :text="item ? item.name : null"></Title>
+    <Title :isMobile="isMobile" :img="item ? item.img : null" :text="item ? item.name : null" contain></Title>
     <el-breadcrumb separator-class="el-icon-arrow-right" class="product_path">
       <el-breadcrumb-item :to="{ path: '/product' }">{{$t('navigator.products')}}</el-breadcrumb-item>
       <el-breadcrumb-item>{{item.name}}</el-breadcrumb-item>

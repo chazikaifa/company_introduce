@@ -117,7 +117,6 @@ export default {
   padding-bottom: 56.25%;
   background-size: cover;
   background-color: #CCCCCC;
-  opacity: 0.7;
 }
 .item_title {
   font-size: 26px;
