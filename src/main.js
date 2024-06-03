@@ -17,7 +17,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.changeLanguage = function() {
   let lan;
-  switch(localStorage.getItem('languageSet')) {
+  switch(this.$i18n.locale) {
     case "zh":
       lan = "en"
       break;
@@ -29,7 +29,6 @@ Vue.prototype.changeLanguage = function() {
   }
   this.$i18n.locale = lan;
   document.title = this.$t('title.company_name');
-  localStorage.setItem('languageSet', lan)
 }
 
 const app = new Vue({
